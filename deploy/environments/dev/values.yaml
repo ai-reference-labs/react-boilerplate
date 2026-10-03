@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: registry.example.invalid/journey-hub
+  tag: dev
+route:
+  host: journey-hub-dev.apps.example.invalid
+env:
+  APP_VERSION: dev

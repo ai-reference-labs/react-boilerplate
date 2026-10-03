@@ -1,0 +1,28 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/portal-e2e"
+    },
+    {
+      "path": "./apps/portal"
+    },
+    {
+      "path": "./libs/intake/feature"
+    },
+    {
+      "path": "./libs/planning/feature"
+    },
+    {
+      "path": "./libs/ui/components"
+    },
+    {
+      "path": "./libs/auth/client"
+    },
+    {
+      "path": "./libs/shared/api-client"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+replicaCount: 2
+
+image:
+  repository: example.invalid/journey-hub
+  tag: latest
+  digest: ''
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3000
+
+route:
+  enabled: true
+  host: ''
+  tlsTermination: edge
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+env:
+  APP_VERSION: development
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: journey-hub
+description: One Next.js application for independently owned journey modules
+type: application
+version: 0.1.0
+appVersion: '0.1.0'

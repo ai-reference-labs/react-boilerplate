@@ -1,0 +1,127 @@
+.mark {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  font: 700 0.68rem var(--mono);
+  letter-spacing: 0.04em;
+}
+.citrus {
+  background: var(--citrus);
+}
+.blue {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.ink {
+  background: var(--ink);
+  color: white;
+}
+.shell {
+  min-height: 100vh;
+  background: var(--paper);
+}
+.nav {
+  height: 72px;
+  padding: 0 5vw;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+.home span {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--ink);
+  border-radius: 50%;
+  font: 700 0.67rem var(--mono);
+}
+.nav > div {
+  display: flex;
+  gap: 25px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.nav > div a {
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+}
+.nav > div a:hover {
+  border-color: currentColor;
+}
+.header {
+  padding: 72px 7vw 58px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  width: 260px;
+  height: 260px;
+  position: absolute;
+  right: 7vw;
+  top: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 38px var(--paper),
+    inset 0 0 0 39px var(--line);
+  opacity: 0.7;
+}
+.meta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  color: var(--muted);
+  font: 700 0.72rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.header h1 {
+  margin: 34px 0 14px;
+  font: 500 clamp(4rem, 7vw, 7rem) / 0.9 var(--display);
+  letter-spacing: -0.055em;
+}
+.header > p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+.workspace {
+  padding: 64px 7vw 100px;
+}
+@media (max-width: 700px) {
+  .nav {
+    padding: 0 22px;
+  }
+  .nav > div {
+    gap: 14px;
+  }
+  .header {
+    padding: 55px 24px 45px;
+  }
+  .header::after {
+    display: none;
+  }
+  .workspace {
+    padding: 42px 24px 70px;
+  }
+}

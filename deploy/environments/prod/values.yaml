@@ -1,0 +1,8 @@
+replicaCount: 2
+image:
+  repository: registry.example.invalid/journey-hub
+  digest: ''
+route:
+  host: journey-hub.apps.example.invalid
+env:
+  APP_VERSION: replace-in-pipeline

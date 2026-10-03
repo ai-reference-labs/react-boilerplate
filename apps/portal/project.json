@@ -1,0 +1,9 @@
+{
+  "name": "@react-nx-bootstrap-portal/portal",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/portal/src",
+  "projectType": "application",
+  "tags": ["scope:app", "type:app", "platform:next"],
+  "// targets": "to see all targets run: nx show project @react-nx-bootstrap-portal/portal --web",
+  "targets": {}
+}

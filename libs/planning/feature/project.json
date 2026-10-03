@@ -1,0 +1,9 @@
+{
+  "name": "planning-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/planning/feature/src",
+  "projectType": "library",
+  "tags": ["scope:planning", "type:feature", "platform:client"],
+  "// targets": "to see all targets run: nx show project planning-feature --web",
+  "targets": {}
+}

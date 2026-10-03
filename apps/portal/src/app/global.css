@@ -1,0 +1,50 @@
+:root {
+  --paper: #f4f1e8;
+  --warm-white: #ebe7dc;
+  --ink: #20221e;
+  --muted: #68695f;
+  --line: #b8b6ac;
+  --grid: rgba(55, 57, 51, 0.08);
+  --citrus: #d8ef62;
+  --blue: #275dcc;
+  --display:
+    'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  --body: 'Avenir Next', Avenir, 'Century Gothic', sans-serif;
+  --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+::selection {
+  background: var(--citrus);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}

@@ -1,0 +1,140 @@
+.board {
+  border: 1px solid var(--ink);
+  background: #f8f5ed;
+}
+.toolbar {
+  min-height: 82px;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+}
+.toolbar div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.toolbar span,
+.contract span {
+  font: 700 0.63rem var(--mono);
+  letter-spacing: 0.13em;
+  color: var(--muted);
+}
+.toolbar strong {
+  font: 500 1.45rem var(--display);
+}
+.toolbar button,
+.message button {
+  border: 1px solid var(--ink);
+  background: transparent;
+  padding: 10px 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.toolbar button:hover {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.toolbar button:disabled {
+  opacity: 0.5;
+}
+.message {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+.tableWrap {
+  overflow-x: auto;
+}
+.tableWrap table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+}
+.tableWrap th {
+  padding: 13px 18px;
+  background: var(--ink);
+  color: white;
+  text-align: left;
+  font: 700 0.63rem var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tableWrap td {
+  padding: 22px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  vertical-align: middle;
+}
+.tableWrap td:first-child {
+  min-width: 260px;
+}
+.tableWrap td strong {
+  display: block;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+.tableWrap small {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+.id {
+  font: 700 0.61rem var(--mono);
+  color: var(--blue);
+}
+.progress {
+  width: 90px;
+  height: 5px;
+  background: #d3d0c7;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+}
+.status {
+  display: inline-block;
+  padding: 7px 9px;
+  font: 800 0.6rem var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+.ready {
+  background: var(--citrus);
+  border-color: var(--ink);
+}
+.scheduled {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.discovery {
+  background: transparent;
+}
+.contract {
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  background: #e3dfd4;
+}
+.contract code {
+  font: 0.7rem var(--mono);
+}
+.contract a {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+@media (max-width: 650px) {
+  .contract {
+    grid-template-columns: 1fr;
+  }
+}

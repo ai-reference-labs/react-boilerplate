@@ -1,0 +1,32 @@
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pill > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  font: 700 0.66rem var(--mono);
+}
+.pill div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.pill strong {
+  font-size: 0.75rem;
+}
+.pill small {
+  color: var(--muted);
+  font-size: 0.65rem;
+  margin-top: 3px;
+}
+@media (max-width: 520px) {
+  .pill div {
+    display: none;
+  }
+}

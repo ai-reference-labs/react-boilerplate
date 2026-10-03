@@ -1,0 +1,144 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.8fr);
+  border: 1px solid var(--ink);
+}
+.form {
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.formHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.formHeading span,
+.label {
+  font: 700 0.66rem var(--mono);
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.formHeading h2,
+.apiPanel h2 {
+  font: 500 2.25rem/1 var(--display);
+  letter-spacing: -0.035em;
+  margin: 9px 0 0;
+}
+.step {
+  border: 1px solid var(--line);
+  padding: 8px;
+}
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: 14px 15px;
+  color: var(--ink);
+  outline: 0;
+}
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue);
+}
+.form textarea {
+  resize: vertical;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 18px;
+}
+.form button {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: white;
+  padding: 16px 19px;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.form button:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+.error {
+  padding: 12px;
+  margin: 0;
+  border-left: 3px solid #b43f32;
+  color: #8d2d22;
+  background: #f4ddd7;
+  font-size: 0.8rem;
+}
+.apiPanel {
+  padding: 38px;
+  color: white;
+  background: var(--ink);
+}
+.apiPanel .label {
+  color: var(--citrus);
+}
+.apiPanel > p:not(.label) {
+  color: #aaa99f;
+  line-height: 1.55;
+}
+.apiPanel pre {
+  padding: 18px 0;
+  border-top: 1px solid #4d4e46;
+  border-bottom: 1px solid #4d4e46;
+  color: #d9d8ce;
+  font: 0.72rem/1.7 var(--mono);
+  white-space: pre-wrap;
+}
+.receipt {
+  margin-top: 24px;
+  padding: 18px;
+  background: var(--citrus);
+  color: var(--ink);
+}
+.receipt span {
+  font: 800 0.61rem var(--mono);
+  letter-spacing: 0.12em;
+}
+.receipt strong {
+  display: block;
+  font: 500 2rem var(--display);
+  margin: 8px 0 3px;
+}
+.receipt p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+@media (max-width: 850px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .form,
+  .apiPanel {
+    padding: 25px;
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
