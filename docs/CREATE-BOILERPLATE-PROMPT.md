@@ -102,14 +102,14 @@ root and portal to every consumed library.
 
 Use these exact project and package names:
 
-| Project             | Package import                | Tags                                                  |
-| ------------------- | ----------------------------- | ----------------------------------------------------- |
-| `app1-feature`      | `@journeys/app1-feature`      | `scope:app1`, `type:feature`, `platform:client`       |
-| `app2-feature`      | `@journeys/app2-feature`      | `scope:app2`, `type:feature`, `platform:client`       |
-| `auth-client`       | `@journeys/auth-client`       | `scope:auth`, `type:feature`, `platform:client`       |
-| `auth-server`       | `@journeys/auth-server`       | `scope:auth`, `type:data-access`, `platform:server`   |
-| `shared-api-client` | `@journeys/shared-api-client` | `scope:shared`, `type:data-access`, `platform:shared` |
-| `ui-components`     | `@journeys/ui-components`     | `scope:ui`, `type:ui`, `platform:client`              |
+| Project             | Package import                | Tags                                                      |
+| ------------------- | ----------------------------- | --------------------------------------------------------- |
+| `app1-feature`      | `@journeys/app1-feature`      | `scope:app1`, `type:feature`, `platform:client`           |
+| `app2-feature`      | `@journeys/app2-feature`      | `scope:app2`, `type:feature`, `platform:client`           |
+| `auth-client`       | `@journeys/auth-client`       | `scope:auth`, `type:feature`, `platform:client`           |
+| `auth-server`       | `@journeys/auth-server`       | `scope:auth`, `type:data-access`, `platform:server`       |
+| `shared-api-client` | `@journeys/shared-api-client` | `scope:shared`, `type:data-access`, `platform:isomorphic` |
+| `ui-components`     | `@journeys/ui-components`     | `scope:ui`, `type:ui`, `platform:client`                  |
 
 Configure module boundaries with these rules:
 

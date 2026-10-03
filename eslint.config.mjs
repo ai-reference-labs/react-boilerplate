@@ -56,6 +56,13 @@ export default [
               sourceTag: 'scope:shared',
               onlyDependOnLibsWithTags: ['scope:shared'],
             },
+            {
+              sourceTag: 'platform:client',
+              onlyDependOnLibsWithTags: [
+                'platform:client',
+                'platform:isomorphic',
+              ],
+            },
           ],
         },
       ],

@@ -1,8 +1,8 @@
 # Multi-team React / Next.js / Nx boilerplate implementation plan
 
-Prepared October 2, 2026. Status: proposed design; no application has been scaffolded.
+Prepared October 2, 2026 and updated October 3, 2026. Status: starter implementation complete; production identity and proprietary Lightspeed integration remain environment-specific.
 
-The confirmed model is one deployed application with separately managed team releases, hosted on OpenShift. This plan treats Lightspeed as the internal delivery platform; its pipeline schema, underlying CI runner, supported Helm version, and promotion integration remain unconfirmed. The workspace was empty when inspected.
+The confirmed model is one deployed application with separately managed team releases, hosted on OpenShift. This plan treats Lightspeed as the internal delivery platform; its pipeline schema, underlying CI runner, supported Helm version, and promotion integration remain unconfirmed.
 
 1. Establish the architecture and release contract
 
