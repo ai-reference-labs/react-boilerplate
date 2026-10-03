@@ -1,9 +1,0 @@
-{
-  "name": "intake-feature",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/intake/feature/src",
-  "projectType": "library",
-  "tags": ["scope:intake", "type:feature", "platform:client"],
-  "// targets": "to see all targets run: nx show project intake-feature --web",
-  "targets": {}
-}

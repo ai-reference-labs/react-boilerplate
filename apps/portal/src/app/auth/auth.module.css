@@ -1,0 +1,104 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 80% 16%,
+      rgba(39, 93, 204, 0.15),
+      transparent 30%
+    ),
+    var(--paper);
+}
+.nav {
+  min-height: 72px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.panel {
+  min-height: calc(100vh - 73px);
+  padding: 8vw;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  align-items: center;
+  gap: 8vw;
+}
+.eyebrow,
+.status {
+  font: 700 0.7rem var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.copy h1 {
+  max-width: 760px;
+  margin: 26px 0;
+  font: 500 clamp(4rem, 8vw, 7.5rem) / 0.88 var(--display);
+  letter-spacing: -0.06em;
+}
+.copy > p:last-child {
+  max-width: 590px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+.card {
+  min-height: 430px;
+  padding: 42px;
+  border: 1px solid var(--ink);
+  background: var(--warm-white);
+  box-shadow: 12px 12px 0 var(--citrus);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  justify-content: center;
+}
+.card h2 {
+  margin: 20px 0 0;
+  font: 500 3rem var(--display);
+}
+.card p {
+  margin: -16px 0 12px;
+  color: var(--muted);
+}
+.card form {
+  display: grid;
+}
+.primary,
+.secondary {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  text-align: center;
+  font-weight: 800;
+}
+.primary {
+  background: var(--ink);
+  color: white;
+}
+.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+.card small {
+  color: var(--muted);
+  line-height: 1.55;
+}
+@media (max-width: 800px) {
+  .panel {
+    grid-template-columns: 1fr;
+    padding: 60px 24px 90px;
+  }
+  .copy h1 {
+    font-size: clamp(3.4rem, 16vw, 5.5rem);
+  }
+  .card {
+    min-height: 380px;
+    padding: 30px;
+  }
+}

@@ -1,8 +1,4 @@
-import type {
-  IntakeReceipt,
-  IntakeRequest,
-  PlanningQueueResponse,
-} from './contracts';
+import type { App1Receipt, App1Request, App2QueueResponse } from './contracts';
 
 export class ApiError extends Error {
   constructor(
@@ -33,13 +29,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export function submitIntake(input: IntakeRequest) {
-  return request<IntakeReceipt>('/api/intake', {
+export function submitApp1(input: App1Request) {
+  return request<App1Receipt>('/api/app1', {
     method: 'POST',
     body: JSON.stringify(input),
   });
 }
 
-export function getPlanningQueue() {
-  return request<PlanningQueueResponse>('/api/planning');
+export function getApp2Queue() {
+  return request<App2QueueResponse>('/api/app2');
 }

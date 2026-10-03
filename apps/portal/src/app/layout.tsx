@@ -5,7 +5,8 @@ export const metadata = {
     default: 'Journey Hub',
     template: '%s · Journey Hub',
   },
-  description: 'A multi-team Next.js and Nx application starter',
+  description:
+    'A multi-team Next.js and Nx application starter with pre-sign-on and post-sign-on routes',
 };
 
 export default function RootLayout({

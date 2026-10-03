@@ -1,6 +1,6 @@
 # Journey Hub
 
-A working Nx and Next.js starter for an application assembled by the app, intake, planning, UI-components, and auth teams. It produces one deployable application while keeping source ownership, tests, and dependency boundaries separate.
+A working Nx and Next.js starter for an application assembled by the app, App 1, App 2, UI-components, and auth teams. It produces one deployable application while keeping source ownership, tests, and dependency boundaries separate.
 
 ## Start locally
 
@@ -18,26 +18,32 @@ Open [http://localhost:3000](http://localhost:3000). The getting-started page li
 
 Yes. Journey modules are libraries, so they need a small host to supply Next.js routing and API routes. The single portal app is that host. Next.js compiles requested routes on demand during development.
 
-| Team          | Visual workbench                                                   | Focused checks                                                  |
-| ------------- | ------------------------------------------------------------------ | --------------------------------------------------------------- |
-| Intake        | `npm run dev:intake`, then open `http://localhost:4201/intake`     | `npm run test:intake` and `npx nx typecheck intake-feature`     |
-| Planning      | `npm run dev:planning`, then open `http://localhost:4202/planning` | `npm run test:planning` and `npx nx typecheck planning-feature` |
-| UI components | Use either journey route while developing shared components        | `npx nx test ui-components`                                     |
-| Auth          | Use the portal header as the sample integration point              | `npx nx test auth-client`                                       |
-| App           | `npm run dev`                                                      | `npx nx test portal` and `npm run e2e`                          |
+| Team          | Visual workbench                                              | Focused checks                                               |
+| ------------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
+| App 1         | `npm run dev:app1`, then open `http://localhost:4201/app1`    | `npm run test:app1` and `npx nx typecheck app1-feature`      |
+| App 2         | `npm run dev:app2`, then open `http://localhost:4202/app2`    | `npm run test:app2` and `npx nx typecheck app2-feature`      |
+| UI components | Use either journey route while developing shared components   | `npx nx test ui-components`                                  |
+| Auth          | Open `http://localhost:3000/auth` for the sample sign-on flow | `npx nx typecheck auth-server` and `npx nx test auth-client` |
+| App           | `npm run dev`                                                 | `npx nx test portal` and `npm run e2e`                       |
 
 These commands isolate development ownership and verification. They do not create independent production deployments; the production unit is still `portal`.
 
+## Pre-sign-on and post-sign-on flow
+
+`/app1` and `POST /api/app1` are public, so users can start there before sign-on. `/app2` and `GET /api/app2` validate the HTTP-only sample session. Opening App 2 without a session redirects to `/auth`; the demo sign-in then returns the user to App 2.
+
+The included identity is a local integration example. Replace the demo login route and cookie value with your approved OIDC provider, signed session, and authorization rules before production.
+
 ## Sample API integration
 
-The intake form calls `POST /api/intake` through `@journeys/shared-api-client`. The planning module calls `GET /api/planning`. Both routes use shared TypeScript contracts.
+App 1 submits through `@journeys/shared-api-client`. App 2 loads its protected queue through the same typed client.
 
 ```bash
 curl http://localhost:3000/api/health
 
-curl -X POST http://localhost:3000/api/intake \
+curl -X POST http://localhost:3000/api/app1 \
   -H 'content-type: application/json' \
-  -d '{"title":"Renewal flow","requester":"Intake team","description":"Reduce repeated data entry","priority":"high"}'
+  -d '{"title":"Renewal flow","requester":"App 1 team","description":"Reduce repeated data entry","priority":"high"}'
 ```
 
 The API is intentionally in-memory and deterministic enough for a starter. Replace route internals with real service adapters while preserving the contracts and error handling.
@@ -47,10 +53,11 @@ The API is intentionally in-memory and deterministic enough for a starter. Repla
 ```text
 apps/portal                    Next.js shell, routes, and API handlers
 apps/portal-e2e                Playwright critical-path tests
-libs/intake/feature            Intake-owned interactive module
-libs/planning/feature          Planning-owned queue module
+libs/app1/feature              App 1 public interactive module
+libs/app2/feature              App 2 protected queue module
 libs/ui/components             Shared visual shell and primitives
 libs/auth/client               Sample authenticated-user view
+libs/auth/server               Server session reader and shared auth contract
 libs/shared/api-client         Shared contracts and typed fetch client
 deploy/helm/portal             OpenShift-ready Helm chart
 tools/ci/verify.sh             CI adapter for Lightspeed
@@ -60,7 +67,7 @@ Nx tags enforce the permitted team dependencies in `eslint.config.mjs`. Inspect 
 
 ```bash
 npm run graph
-npx nx show project intake-feature
+npx nx show project app1-feature
 npx nx show project portal
 ```
 
@@ -106,4 +113,4 @@ helm template journey-hub deploy/helm/portal -f deploy/environments/dev/values.y
 
 Production promotion should replace `image.digest` with the already tested image digest. Update the example registry and Route hosts before connecting the chart to Lightspeed. Keep proprietary Lightspeed pipeline fields in your organization-owned adapter; the repository exposes stable commands rather than guessing that schema.
 
-The broader architecture and rollout rationale is in [IMPLEMENTATION-PLAN.md](./IMPLEMENTATION-PLAN.md).
+The broader architecture and rollout rationale is in [IMPLEMENTATION-PLAN.md](./IMPLEMENTATION-PLAN.md). To recreate the full starter in another repository, use [the implementation prompt](./docs/CREATE-BOILERPLATE-PROMPT.md).

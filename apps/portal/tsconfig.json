@@ -65,16 +65,19 @@
   ],
   "references": [
     {
-      "path": "../../libs/planning/feature"
+      "path": "../../libs/app2/feature"
     },
     {
       "path": "../../libs/auth/client"
     },
     {
+      "path": "../../libs/auth/server"
+    },
+    {
       "path": "../../libs/ui/components"
     },
     {
-      "path": "../../libs/intake/feature"
+      "path": "../../libs/app1/feature"
     },
     {
       "path": "../../libs/shared/api-client"

@@ -9,8 +9,9 @@ const nextConfig = {
   poweredByHeader: false,
   transpilePackages: [
     '@journeys/auth-client',
-    '@journeys/intake-feature',
-    '@journeys/planning-feature',
+    '@journeys/app1-feature',
+    '@journeys/app2-feature',
+    '@journeys/auth-server',
     '@journeys/shared-api-client',
     '@journeys/ui-components',
   ],

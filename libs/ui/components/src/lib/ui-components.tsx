@@ -35,8 +35,9 @@ export function JourneyShell({
           <span>JH</span> Journey Hub
         </a>
         <div>
-          <a href="/intake">Intake</a>
-          <a href="/planning">Planning</a>
+          <a href="/app1">App 1</a>
+          <a href="/app2">App 2</a>
+          <a href="/auth">Sign in</a>
         </div>
       </nav>
       <header className={styles.header}>

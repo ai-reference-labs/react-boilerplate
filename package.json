@@ -5,8 +5,8 @@
   "scripts": {
     "prepare": "husky",
     "dev": "nx dev portal",
-    "dev:intake": "nx dev portal --port=4201",
-    "dev:planning": "nx dev portal --port=4202",
+    "dev:app1": "nx dev portal --port=4201",
+    "dev:app2": "nx dev portal --port=4202",
     "build": "cross-env NODE_ENV=production nx build portal",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -14,8 +14,8 @@
     "lint": "nx run-many -t lint",
     "typecheck": "nx run-many -t typecheck",
     "test": "nx run-many -t test --configuration=ci",
-    "test:intake": "nx test intake-feature --configuration=ci",
-    "test:planning": "nx test planning-feature --configuration=ci",
+    "test:app1": "nx test app1-feature --configuration=ci",
+    "test:app2": "nx test app2-feature --configuration=ci",
     "graph": "nx graph",
     "e2e": "nx e2e @react-nx-bootstrap-portal/portal-e2e"
   },
@@ -78,8 +78,8 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/intake/*",
-    "libs/planning/*",
+    "libs/app1/*",
+    "libs/app2/*",
     "libs/ui/*",
     "libs/auth/*",
     "libs/shared/*"

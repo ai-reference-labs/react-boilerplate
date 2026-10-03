@@ -23,18 +23,18 @@ export default [
           depConstraints: [
             { sourceTag: 'scope:app', onlyDependOnLibsWithTags: ['*'] },
             {
-              sourceTag: 'scope:intake',
+              sourceTag: 'scope:app1',
               onlyDependOnLibsWithTags: [
-                'scope:intake',
+                'scope:app1',
                 'scope:shared',
                 'scope:ui',
                 'scope:auth',
               ],
             },
             {
-              sourceTag: 'scope:planning',
+              sourceTag: 'scope:app2',
               onlyDependOnLibsWithTags: [
-                'scope:planning',
+                'scope:app2',
                 'scope:shared',
                 'scope:ui',
                 'scope:auth',

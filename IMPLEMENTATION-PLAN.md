@@ -14,15 +14,15 @@ Distinguish three events:
 
 | Event                  | Owner                                        | Result                                                             |
 | ---------------------- | -------------------------------------------- | ------------------------------------------------------------------ |
-| Team readiness         | Intake, planning, UI, or auth team           | Reviewed change, tests, compatibility declaration, release notes   |
+| Team readiness         | App 1, App 2, UI, or auth team               | Reviewed change, tests, compatibility declaration, release notes   |
 | Application deployment | App team with platform support               | Tested source snapshot becomes one immutable image                 |
 | Feature activation     | Journey owner under the agreed change policy | An already deployed feature is enabled for a cohort or environment |
 
 Recommend source-based internal libraries initially. All libraries are compiled from the application release's Git commit. A team release label records readiness; it does not select an older library implementation. A disabled feature still has to compile, pass integration tests, and avoid side effects while disabled.
 
-For example, intake can approve its new flow for application 1.4.0 while planning's new editor remains disabled. Both implementations may exist in the image; only the approved behavior is activated. Reverting the image reverts the whole application. A correctly implemented feature flag can disable one journey change without an image rollback.
+For example, App 1 can approve its new flow for application 1.4.0 while App 2's new editor remains disabled. Both implementations may exist in the image; only the approved behavior is activated. Reverting the image reverts the whole application. A correctly implemented feature flag can disable one journey change without an image rollback.
 
-If the requirement later becomes “assemble intake 2.3.0 with planning 1.8.0 despite newer planning source in this repository,” introduce immutable packages in a private registry, exact dependency pins, and promotion PRs. Workspace source aliases or workspace links cannot provide that selection. Published packages also need tested React peer dependencies, server/client exports, declaration files, and preserved React Server Component directives. Nx Release can manage independent package versions; publishing a library never deploys the app automatically. See [independent releases](https://nx.dev/docs/guides/nx-release/release-projects-independently) and [release groups](https://nx.dev/docs/guides/nx-release/release-groups).
+If the requirement later becomes “assemble App 1 version 2.3.0 with App 2 version 1.8.0 despite newer App 2 source in this repository,” introduce immutable packages in a private registry, exact dependency pins, and promotion PRs. Workspace source aliases or workspace links cannot provide that selection. Published packages also need tested React peer dependencies, server/client exports, declaration files, and preserved React Server Component directives. Nx Release can manage independent package versions; publishing a library never deploys the app automatically. See [independent releases](https://nx.dev/docs/guides/nx-release/release-projects-independently) and [release groups](https://nx.dev/docs/guides/nx-release/release-groups).
 
 2. Allocate ownership
 
@@ -32,8 +32,8 @@ If the requirement later becomes “assemble intake 2.3.0 with planning 1.8.0 de
 | ----------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | App               | Shell, global layout, navigation, route composition conventions, runtime configuration, integration release | All teams for shared integration changes                                                                   |
 | UI-components     | Design tokens, accessible primitives, shared patterns, Storybook                                            | Consumers for breaking changes                                                                             |
-| Intake            | Intake routes, features, domain rules, API adapters, journey tests, activation flags                        | Auth for permissions; app for global navigation                                                            |
-| Planning          | Planning routes, features, domain rules, API adapters, journey tests, activation flags                      | Auth for permissions; intake through explicit business contracts                                           |
+| App 1             | Pre-sign-on routes, features, domain rules, API adapters, journey tests, activation flags                   | Auth for transitions; app for global navigation                                                            |
+| App 2             | Post-sign-on routes, features, domain rules, API adapters, journey tests, activation flags                  | Auth for permissions; App 1 through explicit business contracts                                            |
 | Auth              | Identity-provider integration, session lifecycle, server authorization helpers, client session views        | App and journey owners for access rules                                                                    |
 | Platform function | Lightspeed integration, OpenShift, registry, secrets, deployment permissions, Helm conventions              | Assign to existing platform staff or app team; this is an ownership requirement, not a new team assumption |
 
@@ -50,9 +50,9 @@ apps/
   portal/
     src/app/
       layout.tsx
-      (authenticated)/
-        intake/page.tsx
-        planning/page.tsx
+      app1/page.tsx
+      app2/page.tsx
+      auth/page.tsx
       api/auth/...
       api/health/live/route.ts
       api/health/ready/route.ts
@@ -60,8 +60,8 @@ apps/
     project.json
   portal-e2e/
 libs/
-  intake/{feature,domain,data-access}/
-  planning/{feature,domain,data-access}/
+  app1/{feature,domain,data-access}/
+  app2/{feature,domain,data-access}/
   ui/{tokens,components}/
   auth/{server,client,contracts}/
   shared/{contracts,config,feature-flags,observability,test-utils}/
@@ -101,7 +101,7 @@ Use TypeScript strict mode, ESLint flat configuration, one formatter, React Test
 
 Start with official generators and inferred targets. Add project metadata and explicit targets only where needed. `@nx/next/plugin` infers application tasks; configure ESLint, the selected test runner, Playwright, and Storybook through their supported Nx integrations. Confirm every intended command through `nx show project` rather than assuming a target exists.
 
-The following is a partial planning example, not a complete generated configuration:
+The following is a partial configuration example, not a complete generated configuration:
 
 ```json
 {
@@ -135,25 +135,25 @@ Use three independent tag dimensions:
 
 ```json
 {
-  "name": "intake-feature",
-  "tags": ["scope:intake", "type:feature", "platform:client"]
+  "name": "app1-feature",
+  "tags": ["scope:app1", "type:feature", "platform:client"]
 }
 ```
 
 Example dependency policy:
 
-| Source   | Allowed scope dependencies              |
-| -------- | --------------------------------------- |
-| App      | App, intake, planning, UI, auth, shared |
-| Intake   | Intake, UI, auth, shared                |
-| Planning | Planning, UI, auth, shared              |
-| UI       | UI and shared                           |
-| Auth     | Auth, UI, shared                        |
-| Shared   | Shared                                  |
+| Source | Allowed scope dependencies          |
+| ------ | ----------------------------------- |
+| App    | App, App 1, App 2, UI, auth, shared |
+| App 1  | App 1, UI, auth, shared             |
+| App 2  | App 2, UI, auth, shared             |
+| UI     | UI and shared                       |
+| Auth   | Auth, UI, shared                    |
+| Shared | Shared                              |
 
 Add type constraints: domain libraries depend on domain/contracts/utilities, UI primitives depend on UI primitives/tokens/utilities, and data-access depends on domain/contracts/utilities. No library imports an app. Client projects cannot import server projects; use `server-only` guards and explicit exports for sensitive modules. Server components may intentionally render client components, so do not apply a blanket inverse prohibition.
 
-Enforce the policy with `@nx/enforce-module-boundaries`; prohibit deep imports, cycles, and untagged production projects. A generator and CI check require tags on new projects. Keep exports narrow. If planning needs intake data, use a defined API or neutral contract, not intake feature internals. Nx supports tag-based constraints through its [module boundary rule](https://nx.dev/docs/features/enforce-module-boundaries).
+Enforce the policy with `@nx/enforce-module-boundaries`; prohibit deep imports, cycles, and untagged production projects. A generator and CI check require tags on new projects. Keep exports narrow. If App 2 needs App 1 data, use a defined API or neutral contract, not App 1 feature internals. Nx supports tag-based constraints through its [module boundary rule](https://nx.dev/docs/features/enforce-module-boundaries).
 
 Verification commands after generation:
 
@@ -171,7 +171,7 @@ Test cache behavior by changing a journey source file, a shared UI file, and sha
 
 ---
 
-Keep route modules thin: they compose feature exports and handle Next.js routing concerns. Give each journey loading, error, empty, forbidden, and validation states. Make the initial boilerplate demonstrate one intake form and one planning view with mocked APIs, typed contracts, and an accessible shared layout.
+Keep route modules thin: they compose feature exports and handle Next.js routing concerns. Give each journey loading, error, empty, forbidden, and validation states. Make the initial boilerplate demonstrate one pre-sign-on App 1 form and one post-sign-on App 2 view with mocked APIs, typed contracts, and an accessible shared layout.
 
 Keep transient UI state within a journey; use a server-state library only where needed. Store cross-journey business state in APIs. Route navigation may carry stable record IDs; avoid coupling journeys through a giant global store.
 
@@ -189,7 +189,7 @@ Each team supplies a small release record: owner, change summary, compatibility 
 
 Illustrative release composition:
 
-| App image        | Intake             | Planning                         | UI/auth                     |
+| App image        | App 1              | App 2                            | UI/auth                     |
 | ---------------- | ------------------ | -------------------------------- | --------------------------- |
 | 1.4.0            | New form activated | New editor deployed but disabled | Compatible changes          |
 | Same 1.4.0 image | Unchanged          | Editor activated after approval  | Unchanged                   |
@@ -236,7 +236,7 @@ For multiple replicas, decide session storage, cache invalidation, and rollout b
 
 ---
 
-Use one reusable application chart and one `portal` release in each environment namespace, for example `portal-dev`, `portal-qa`, `portal-uat`, and `portal-prod`. Production cluster separation follows the existing platform policy. One chart must not embed separate intake and planning deployments under the chosen model.
+Use one reusable application chart and one `portal` release in each environment namespace, for example `portal-dev`, `portal-qa`, `portal-uat`, and `portal-prod`. Production cluster separation follows the existing platform policy. One chart must not embed separate App 1 and App 2 deployments under the chosen model.
 
 Chart resources: Deployment, Service, OpenShift Route, ConfigMap, Secret references, ServiceAccount, NetworkPolicy, HPA where metrics support it, and PodDisruptionBudget. Platform-owned namespaces/RBAC stay outside app chart ownership where required. Put configurable resource requests/limits, replicas, probes, image digest, routing/TLS, runtime settings, and security context in values with a schema. Secrets come from the approved secret manager or cluster integration, not committed values files.
 
@@ -256,9 +256,9 @@ Acceptance scenarios:
 
 1. A new team member can install and run the app from documented commands.
 2. A journey generator produces a correctly tagged library, test setup, owner metadata, and a thin route example.
-3. CI rejects an intake import from planning internals and rejects client imports of server auth code.
+3. CI rejects an App 1 import from App 2 internals and rejects client imports of server auth code.
 4. Shared UI/auth changes exercise affected consumers; chart-only changes still run chart validation.
-5. Intake can activate a feature while planning's new feature stays disabled, including direct-link tests.
+5. App 1 can activate a feature while App 2's new feature stays disabled, including direct-link tests.
 6. Unauthenticated, unauthorized, expired-session, logout, and CSRF-relevant flows behave correctly.
 7. The same image digest reaches QA, UAT, and production with different runtime settings.
 8. The container starts under the OpenShift-assigned UID and survives a multi-replica rollout.
@@ -275,7 +275,7 @@ Estimate: approximately 5–7 calendar weeks for a usable production foundation 
 | -------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Decisions and platform discovery | 2–3 days            | Architecture record, release semantics, version matrix, Lightspeed sample, cluster/registry/identity access |
 | Nx foundation                    | 3–5 days            | App and initial libraries, ownership, tags, enforced boundaries, local run and checks                       |
-| Shared shell and sample journeys | 5–7 days            | Design primitives, auth integration, typed APIs, intake/planning slices, flag contract                      |
+| Shared shell and sample journeys | 5–7 days            | Design primitives, auth integration, typed APIs, App 1/App 2 slices, flag contract                          |
 | CI and release records           | 3–5 days            | Affected pipeline, complete candidate checks, release metadata, image build/scanning                        |
 | OpenShift and Helm               | 4–6 days            | Same-image promotion, runtime config, probes, deployment gates, recovery rehearsal                          |
 | Hardening and handover           | 4–6 days            | Multi-replica/load checks, observability, onboarding generator, runbooks, team acceptance                   |

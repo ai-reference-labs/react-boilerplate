@@ -1,27 +1,26 @@
 import Link from 'next/link';
-import { UserPill } from '@journeys/auth-client';
 import { ModuleMark } from '@journeys/ui-components';
 import styles from './page.module.css';
 
 const modules = [
   {
     id: '01',
-    name: 'Intake',
-    owner: 'Intake team',
+    name: 'App 1',
+    owner: 'App 1 team · Pre-sign-on',
     description:
-      'Capture a request, validate it, and hand a typed record to planning.',
-    href: '/intake',
-    command: 'npm run dev:intake',
+      'Start a public request before sign-on and send it through a typed API.',
+    href: '/app1',
+    command: 'npm run dev:app1',
     tone: 'citrus' as const,
   },
   {
     id: '02',
-    name: 'Planning',
-    owner: 'Planning team',
+    name: 'App 2',
+    owner: 'App 2 team · Post-sign-on',
     description:
-      'Load the sample queue and turn accepted requests into delivery plans.',
-    href: '/planning',
-    command: 'npm run dev:planning',
+      'Sign in, load the protected queue, and exercise an authorized API.',
+    href: '/app2',
+    command: 'npm run dev:app2',
     tone: 'blue' as const,
   },
 ];
@@ -36,7 +35,7 @@ export default function GettingStartedPage() {
         </Link>
         <div className={styles.navMeta}>
           <span className={styles.environment}>LOCAL / READY</span>
-          <UserPill name="Alex Morgan" role="Application developer" />
+          <Link href="/auth">Demo sign in →</Link>
         </div>
       </nav>
 
@@ -52,7 +51,7 @@ export default function GettingStartedPage() {
           modules come together in one release.
         </p>
         <div className={styles.heroActions}>
-          <Link className={styles.primaryAction} href="/intake">
+          <Link className={styles.primaryAction} href="/app1">
             Run the sample journey <span aria-hidden="true">↗</span>
           </Link>
           <a className={styles.textAction} href="#team-modules">
@@ -68,11 +67,11 @@ export default function GettingStartedPage() {
 
       <section className={styles.statusStrip} aria-label="Workspace status">
         <div>
-          <strong>05</strong>
+          <strong>06</strong>
           <span>owned libraries</span>
         </div>
         <div>
-          <strong>03</strong>
+          <strong>05</strong>
           <span>sample API routes</span>
         </div>
         <div>

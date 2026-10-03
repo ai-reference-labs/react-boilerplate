@@ -1,0 +1,9 @@
+{
+  "name": "app2-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/app2/feature/src",
+  "projectType": "library",
+  "tags": ["scope:app2", "type:feature", "platform:client"],
+  "// targets": "to see all targets run: nx show project app2-feature --web",
+  "targets": {}
+}

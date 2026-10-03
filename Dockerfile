@@ -4,8 +4,9 @@ COPY package.json package-lock.json ./
 COPY apps/portal/package.json apps/portal/package.json
 COPY apps/portal-e2e/package.json apps/portal-e2e/package.json
 COPY libs/auth/client/package.json libs/auth/client/package.json
-COPY libs/intake/feature/package.json libs/intake/feature/package.json
-COPY libs/planning/feature/package.json libs/planning/feature/package.json
+COPY libs/auth/server/package.json libs/auth/server/package.json
+COPY libs/app1/feature/package.json libs/app1/feature/package.json
+COPY libs/app2/feature/package.json libs/app2/feature/package.json
 COPY libs/shared/api-client/package.json libs/shared/api-client/package.json
 COPY libs/ui/components/package.json libs/ui/components/package.json
 RUN npm ci

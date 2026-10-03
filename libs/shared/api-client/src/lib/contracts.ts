@@ -1,20 +1,20 @@
 export type Priority = 'standard' | 'high' | 'urgent';
 
-export interface IntakeRequest {
+export interface App1Request {
   title: string;
   requester: string;
   description: string;
   priority: Priority;
 }
 
-export interface IntakeReceipt {
+export interface App1Receipt {
   id: string;
   status: 'accepted';
   submittedAt: string;
   summary: string;
 }
 
-export interface PlanItem {
+export interface App2Item {
   id: string;
   title: string;
   owner: string;
@@ -24,9 +24,9 @@ export interface PlanItem {
   status: 'discovery' | 'ready' | 'scheduled';
 }
 
-export interface PlanningQueueResponse {
+export interface App2QueueResponse {
   generatedAt: string;
-  items: PlanItem[];
+  items: App2Item[];
 }
 
 export interface HealthResponse {
