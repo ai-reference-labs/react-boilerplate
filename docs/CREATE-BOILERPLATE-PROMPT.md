@@ -229,7 +229,9 @@ Add these scripts:
   "lint": "nx run-many -t lint",
   "typecheck": "nx run-many -t typecheck",
   "test": "nx run-many -t test --configuration=ci",
-  "build": "cross-env NODE_ENV=production nx build portal"
+  "build": "cross-env NODE_ENV=production nx build portal",
+  "e2e": "nx e2e @react-nx-bootstrap-portal/portal-e2e -- --project=chromium",
+  "e2e:all": "nx e2e @react-nx-bootstrap-portal/portal-e2e"
 }
 ```
 

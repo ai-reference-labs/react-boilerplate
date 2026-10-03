@@ -17,7 +17,8 @@
     "test:app1": "nx test app1-feature --configuration=ci",
     "test:app2": "nx test app2-feature --configuration=ci",
     "graph": "nx graph",
-    "e2e": "nx e2e @react-nx-bootstrap-portal/portal-e2e"
+    "e2e": "nx e2e @react-nx-bootstrap-portal/portal-e2e -- --project=chromium",
+    "e2e:all": "nx e2e @react-nx-bootstrap-portal/portal-e2e"
   },
   "private": true,
   "engines": {

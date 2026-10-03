@@ -82,6 +82,10 @@ npm run build
 npm run e2e
 ```
 
+`npm run e2e` runs the Chromium journey suite. Install every Playwright browser
+with `npx playwright install`, then use `npm run e2e:all` for Chromium, Firefox,
+and WebKit.
+
 ## Pre-commit formatting
 
 Husky runs `lint-staged` before every commit. Each staged file that Prettier
